@@ -1,0 +1,97 @@
+definitions:
+  httpUtils.HttpJson:
+    properties:
+      data:
+        type: any
+    type: object
+  httpUtils.HttpJsonList:
+    properties:
+      data:
+        type: any
+      page:
+        example: 1
+        type: integer
+      total:
+        example: 8
+        type: integer
+    type: object
+  pong.Pong:
+    properties:
+      ping:
+        example: pong
+        type: string
+    type: object
+  userModel.User:
+    properties:
+      created_at:
+        type: string
+      email:
+        example: matiaslamela1992@gmail.com
+        type: string
+      first_name:
+        example: Matias
+        type: string
+      id:
+        example: 1
+        type: integer
+      last_name:
+        example: Lamela
+        type: string
+      password:
+        example: "1234"
+        type: string
+      picture:
+        example: https://media.revistagq.com/photos/5ca5fb2aeccc6ac985d559a9/1:1/w_707,h_707,c_limit/rickrolling_3543.png
+        type: string
+      updated_at:
+        type: string
+      username:
+        example: escalera92
+        type: string
+    type: object
+info:
+  contact: {}
+paths:
+  /pong:
+    get:
+      consumes:
+      - application/json
+      description: Pooooooooong
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: pong
+          schema:
+            allOf:
+            - $ref: '#/definitions/httpUtils.HttpJson'
+            - properties:
+                data:
+                  $ref: '#/definitions/pong.Pong'
+              type: object
+      summary: Piiiiiiinggg
+      tags:
+      - ping
+  /users:
+    get:
+      consumes:
+      - application/json
+      description: Gets all the users
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            allOf:
+            - $ref: '#/definitions/httpUtils.HttpJsonList'
+            - properties:
+                data:
+                  items:
+                    $ref: '#/definitions/userModel.User'
+                  type: array
+              type: object
+      summary: GetUsers
+      tags:
+      - users
+swagger: "2.0"
